@@ -30,7 +30,4 @@ Scenario
 
 DNS for clients: 8.8.8.8
 
----
-
-## Repository Layout
 
