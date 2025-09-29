@@ -1,0 +1,13 @@
+# HQ DHCP Server Settings (Server‑PT)
+
+
+NIC (Desktop → IP Configuration):
+- IP: 192.168.20.10
+- Mask: 255.255.255.0
+- Default GW: 192.168.20.1
+- DNS: 8.8.8.8
+
+
+Services → DHCP → On → Pools:
+- HQ-SALES — Network 192.168.10.0/24, Default GW 192.168.10.1, DNS 8.8.8.8, Start 192.168.10.11
+- HQ-HR-IT — Network 192.168.30.0/24, Default GW 192.168.30.1, DNS 8.8.8.8, Start 192.168.30.11

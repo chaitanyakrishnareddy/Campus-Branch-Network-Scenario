@@ -1,0 +1,7 @@
+# Topology
+
+
+Devices
+- HQ: 1× Router, 1× Switch, 1× DHCP Server
+- Branch: 1× Router, 1× Switch, 1× DHCP Server
+- WAN: Serial link HQ↔Branch, ISP stub (serial + loopback 8.8.8.8)

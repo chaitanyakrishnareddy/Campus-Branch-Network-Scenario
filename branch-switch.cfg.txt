@@ -1,0 +1,32 @@
+hostname Branch-Switch
+
+vlan 40 name BR-Sales
+vlan 50 name BR-Guest
+
+interface gi0/1
+description Uplink-to-Branch-Router
+switchport mode trunk
+switchport trunk allowed vlan 40,50
+spanning-tree portfast trunk
+no shutdown
+
+interface gi0/2
+description Branch-DHCP-Server
+switchport mode access
+switchport access vlan 40
+spanning-tree portfast
+no shutdown
+
+interface range fa0/1 - 6
+description Branch-Guest-PCs
+switchport mode access
+switchport access vlan 50
+spanning-tree portfast
+no shutdown
+
+interface range fa0/7 - 10
+description Branch-Sales-PCs
+switchport mode access
+switchport access vlan 40
+spanning-tree portfast
+no shutdown

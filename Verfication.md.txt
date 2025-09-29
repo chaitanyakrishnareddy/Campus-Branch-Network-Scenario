@@ -1,0 +1,24 @@
+# Verification
+
+
+## A) Baseline
+- show ip eigrp neighbors (HQ/Branch): neighbor up over 10.0.0.0/30
+- show ip route eigrp (HQ/Branch): remote VLANs present; Branch has 0.0.0.0/0 via 10.0.0.1
+
+
+## B) DHCP per VLAN
+Renew one PC per VLAN. Expect:
+- VLAN10 → 192.168.10.11+; GW 192.168.10.1; DNS 8.8.8.8
+- VLAN30 → 192.168.30.11+; GW 192.168.30.1; DNS 8.8.8.8
+- VLAN40 → 192.168.40.11+; GW 192.168.40.1; DNS 8.8.8.8
+- VLAN50 → 192.168.50.11+; GW 192.168.50.1; DNS 8.8.8.8
+
+
+## C) Cross‑site & Internet
+- HQ Sales PC ↔ Branch Sales PC: ping succeeds
+- Any corporate PC → ping 8.8.8.8: succeeds; show ip nat translations on HQ shows PAT
+
+
+## D) Optional Guest Isolation (when ACL enabled)
+- Guest PC → any 192.168.XX.XX or 10.X: fails
+- Guest PC → 8.8.8.8: succeeds

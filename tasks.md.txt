@@ -1,0 +1,41 @@
+# Tasks
+
+
+## 1) VLANs & Trunks
+- HQ-Switch
+- VLAN 10 (Sales), 20 (ServerNet), 30 (HR+IT)
+- Gi0/1 trunk allowed 10,20,30 to HQ-Router
+- Gi0/2 access VLAN 20 for the HQ DHCP server
+- Fa0/1–6 → VLAN10; Fa0/7–11 → VLAN30
+- Branch-Switch
+- VLAN 40 (Sales), 50 (Guest)
+- Gi0/1 trunk allowed 40,50 to Branch-Router
+- Gi0/2 access VLAN 40 for the Branch DHCP server
+- Fa0/1–6 → VLAN50; Fa0/7–10 → VLAN40
+
+
+## 2) Router-on-a-Stick
+- HQ-Router: g0/0.{10,20,30}; helpers on 10 & 30 → 192.168.20.10
+- Branch-Router: g0/0.{40,50}; helpers → 192.168.40.10
+
+
+## 3) EIGRP 100 (fast timers)
+- Advertise each VLAN + 10.0.0.0/30; set hello 5 / hold 15
+- Branch as stub connected summary
+
+
+## 4) DHCP Servers
+- HQ server NIC 192.168.20.10/24 GW 192.168.20.1 DNS 8.8.8.8
+- Pools: HQ-SALES (10/24 → GW 10.1), HQ-HR-IT (30/24 → GW 30.1)
+- Branch server NIC 192.168.40.10/24 GW 192.168.40.1 DNS 8.8.8.8
+- Pools: BR-SALES (40/24 → GW 40.1), BR-GUEST (50/24 → GW 50.1)
+
+
+## 5) Centralized Internet (HQ)
+- Static default to ISP 203.0.113.1
+- PAT on HQ out s0/0/1 (include HQ + Branch subnets in inside ACL)
+
+
+## 6) (Optional) Security
+- ACL inbound on Branch g0/0.50 to block Guest → corp
+- (Optional) DHCP snooping on switches; trust trunk + DHCP server ports

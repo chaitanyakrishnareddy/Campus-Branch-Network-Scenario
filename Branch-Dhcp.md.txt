@@ -1,0 +1,13 @@
+# Branch DHCP Server Settings (Server‑PT)
+
+
+NIC (Desktop → IP Configuration):
+- IP: 192.168.40.10
+- Mask: 255.255.255.0
+- Default GW: 192.168.40.1
+- DNS: 8.8.8.8
+
+
+Services → DHCP → On → Pools:
+- BR-SALES — Network 192.168.40.0/24, Default GW 192.168.40.1, DNS 8.8.8.8, Start 192.168.40.11
+- BR-GUEST — Network 192.168.50.0/24, Default GW 192.168.50.1, DNS 8.8.8.8, Start 192.168.50.11

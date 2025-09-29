@@ -1,0 +1,33 @@
+hostname HQ-Switch
+
+vlan 10 name HQ-Sales
+vlan 20 name HQ-ServerNet
+vlan 30 name HQ-HR-IT
+
+interface gi0/1
+description Uplink-to-HQ-Router
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30
+spanning-tree portfast trunk
+no shutdown
+
+interface gi0/2
+description HQ-DHCP-Server
+switchport mode access
+switchport access vlan 20
+spanning-tree portfast
+no shutdown
+
+interface range fa0/1 - 6
+description HQ-Sales-PCs
+switchport mode access
+switchport access vlan 10
+spanning-tree portfast
+no shutdown
+
+interface range fa0/7 - 11
+description HQ-HR-IT-PCs
+switchport mode access
+switchport access vlan 30
+spanning-tree portfast
+no shutdown
